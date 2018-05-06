@@ -7,7 +7,30 @@ import datetime
 import http.client
 
 
-SECRET_KEY = os.environ['DARK_SKY_SECRET_KEY']
+SECRET_KEY  = os.environ['DARK_SKY_SECRET_KEY']
+CSV_HEADERS = [
+    "time",
+    "summary",
+    "icon",
+    "nearestStormDistance",
+    "nearestStormBearing",
+    "precipIntensity",
+    "precipIntensityError",
+    "precipProbability",
+    "precipType",
+    "temperature",
+    "apparentTemperature",
+    "dewPoint",
+    "humidity",
+    "pressure",
+    "windSpeed",
+    "windGust",
+    "windBearing",
+    "cloudCover",
+    "uvIndex",
+    "visibility",
+    "ozone"
+]
 
 
 def main(latitude, longitude):
@@ -50,7 +73,7 @@ def write_csv(row):
         write_headers = False
 
     with open(csv_filename, 'a', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=row.keys())
+        writer = csv.DictWriter(f, fieldnames=CSV_HEADERS)
         if write_headers:
             writer.writeheader()
         writer.writerow(row)
