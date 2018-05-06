@@ -52,5 +52,5 @@ def write_csv(row):
 
 if __name__ == '__main__':
     latitude  = 37.8321
-    longitude = 122.2626
+    longitude = -122.2626
     main(latitude, longitude)
