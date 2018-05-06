@@ -42,9 +42,20 @@ def main(latitude, longitude):
         level=logging.INFO
     )
     logging.info("Requesting weather data from Dark Sky")
-    row = get_weather_http(latitude, longitude)
+
+    try:
+        row = get_weather_http(latitude, longitude)
+    except:
+        logging.error("Fatal error occurred during HTTP stage: {}".format(sys.exc_info()[0]))
+        raise
     logging.info("Writing data to CSV")
-    write_csv(row)
+
+    try:
+        write_csv(row)
+    except:
+        logging.error("Fatal error occurred during CSV stage: {}".format(sys.exc_info()[0]))
+        raise
+
     logging.info("Done.")
 
 
