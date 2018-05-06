@@ -11,6 +11,12 @@ SECRET_KEY = os.environ['DARK_SKY_SECRET_KEY']
 
 
 def main(latitude, longitude):
+    logging.basicConfig(
+        format='%(asctime)s %(levelname)s %(message)s',
+        datefmt='%Y/%m/%d %H:%M:%S',
+        filename='wx_logger.log',
+        level=logging.INFO
+    )
     logging.info("Requesting weather data from Dark Sky")
     row = get_weather_http(latitude, longitude)
     logging.info("Writing data to CSV")
