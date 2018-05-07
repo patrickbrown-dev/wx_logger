@@ -1,3 +1,12 @@
+"""
+logger.py - Logs current Wx metrics to a CSV.
+
+Copyright (c) 2018 Patrick Brown
+
+All previously recorded Wx logs are freely and publicly available at
+https://kineticdial.nyc3.digitaloceanspaces.com/Wx/wxYYYYMMDD.csv
+"""
+
 import sys
 import os
 import json
