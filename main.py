@@ -41,15 +41,15 @@ def main(latitude, longitude):
         filename=log_filename,
         level=logging.INFO
     )
-    logging.info("Requesting weather data from Dark Sky")
 
+    logging.info("Requesting weather data from Dark Sky")
     try:
         row = get_weather_http(latitude, longitude)
     except:
         logging.error("Fatal error occurred during HTTP stage: {}".format(sys.exc_info()[0]))
         raise
-    logging.info("Writing data to CSV")
 
+    logging.info("Writing data to CSV")
     try:
         write_csv(row)
     except:
@@ -82,6 +82,9 @@ def write_csv(row):
     write_headers = True
     if os.path.exists(csv_filename):
         write_headers = False
+
+    # Translates unix timestamp (e.g. 1525595104) to a plot.ly readable format
+    row['time'] = datetime.datetime.fromtimestamp(int(row['time'])).strftime('%Y-%m-%d %H:%M:%S')
 
     with open(csv_filename, 'a', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=CSV_HEADERS)
